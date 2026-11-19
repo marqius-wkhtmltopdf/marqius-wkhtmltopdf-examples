@@ -25,6 +25,8 @@ case "$example" in
     symfony_dir="${RUNNER_TEMP:-/tmp}/marqius-symfony-example"
     composer create-project 'symfony/skeleton:^7.4' "$symfony_dir" --no-interaction --prefer-dist --no-progress
     (cd "$symfony_dir" && composer require symfony/framework-bundle symfony/console symfony/yaml knplabs/knp-snappy-bundle --no-interaction --no-progress)
+    # Fresh Symfony projects do not enable community Flex recipes by default.
+    (cd "$symfony_dir" && php -r '$path = "config/bundles.php"; $bundles = require $path; $bundles["Knp\\Bundle\\SnappyBundle\\KnpSnappyBundle"] = ["all" => true]; file_put_contents($path, "<?php\nreturn " . var_export($bundles, true) . ";\n");')
     mkdir -p "$symfony_dir/src/Command" "$symfony_dir/config/packages"
     cp "$repo_dir/examples/knp-snappy-bundle/src/Command/RenderInvoiceCommand.php" "$symfony_dir/src/Command/"
     cp "$repo_dir/examples/knp-snappy-bundle/config/packages/knp_snappy.yaml" "$symfony_dir/config/packages/"
