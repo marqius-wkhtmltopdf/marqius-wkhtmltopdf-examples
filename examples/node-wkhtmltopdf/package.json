@@ -1,0 +1,7 @@
+{
+  "name": "marqius-node-wkhtmltopdf-example",
+  "private": true,
+  "dependencies": {
+    "wkhtmltopdf": "^0.4.0"
+  }
+}

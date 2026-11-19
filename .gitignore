@@ -1,0 +1,15 @@
+**/vendor/
+**/node_modules/
+**/target/
+**/_build/
+**/deps/
+**/bin/
+**/obj/
+**/.bundle/
+**/__pycache__/
+**/.env
+output/
+.local/
+**/wwwroot/Rotativa/wkhtmltopdf
+**/wwwroot/Rotativa/wkhtmltoimage
+.DS_Store

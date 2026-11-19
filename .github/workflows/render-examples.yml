@@ -1,0 +1,115 @@
+name: Render all 14 library examples
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        runtime: [python, php, ruby, node, go, java, elixir, dotnet]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF inspection and fonts
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends poppler-utils fonts-dejavu-core
+      - name: Install Marqius wkhtmltopdf
+        run: |
+          curl -fsSL https://marqius.com/marqius-wkhtmltopdf.sh -o /tmp/install-marqius.sh
+          bash /tmp/install-marqius.sh
+          echo "WKHTMLTOPDF_BINARY=$(command -v wkhtmltopdf)" >> "$GITHUB_ENV"
+          mkdir -p output
+      - uses: actions/setup-python@v5
+        if: matrix.runtime == 'python'
+        with:
+          python-version: '3.12'
+      - name: Python and Django
+        if: matrix.runtime == 'python'
+        run: |
+          pip install -r examples/python-pdfkit/requirements.txt -r examples/django-wkhtmltopdf/requirements.txt
+          python examples/python-pdfkit/render.py output/python-pdfkit.pdf
+          python examples/django-wkhtmltopdf/render.py output/django-wkhtmltopdf.pdf
+          python scripts/check_pdf.py output/*.pdf
+      - uses: shivammathur/setup-php@v2
+        if: matrix.runtime == 'php'
+        with:
+          php-version: '8.4'
+          extensions: intl, mbstring, dom, xml, gd, zip, sqlite3, pdo_sqlite
+          tools: composer:v2
+      - name: Five PHP integrations
+        if: matrix.runtime == 'php'
+        run: bash scripts/run-php.sh
+      - uses: ruby/setup-ruby@v1
+        if: matrix.runtime == 'ruby'
+        with:
+          ruby-version: '3.3'
+      - name: Ruby
+        if: matrix.runtime == 'ruby'
+        run: |
+          gem install wicked_pdf pdfkit --no-document
+          ruby examples/wicked-pdf/render.rb output/wicked-pdf.pdf
+          ruby examples/ruby-pdfkit/render.rb output/ruby-pdfkit.pdf
+          python3 scripts/check_pdf.py output/*.pdf
+      - uses: actions/setup-node@v4
+        if: matrix.runtime == 'node'
+        with:
+          node-version: '22'
+      - name: Node.js
+        if: matrix.runtime == 'node'
+        run: |
+          npm install --prefix examples/node-wkhtmltopdf
+          node examples/node-wkhtmltopdf/render.js output/node-wkhtmltopdf.pdf
+          python3 scripts/check_pdf.py output/*.pdf
+      - uses: actions/setup-go@v5
+        if: matrix.runtime == 'go'
+        with:
+          go-version: '1.25'
+          cache: false
+      - name: Go
+        if: matrix.runtime == 'go'
+        run: |
+          cd examples/go-wkhtmltopdf
+          go mod tidy
+          go run . ../../output/go-wkhtmltopdf.pdf
+          cd ../..
+          python3 scripts/check_pdf.py output/*.pdf
+      - uses: actions/setup-java@v4
+        if: matrix.runtime == 'java'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Java
+        if: matrix.runtime == 'java'
+        run: |
+          cd examples/java-wkhtmltopdf-wrapper
+          mvn -B -q compile exec:java -Dexec.mainClass=Smoke -Dexec.args=../../output/java-wkhtmltopdf-wrapper.pdf
+          cd ../..
+          python3 scripts/check_pdf.py output/*.pdf
+      - uses: erlef/setup-beam@v1
+        if: matrix.runtime == 'elixir'
+        with:
+          otp-version: '26.2'
+          elixir-version: '1.16.3'
+      - name: Elixir
+        if: matrix.runtime == 'elixir'
+        run: |
+          cd examples/elixir-pdf-generator
+          mix local.hex --force
+          mix deps.get
+          mix run render.exs ../../output/elixir-pdf-generator.pdf
+          cd ../..
+          python3 scripts/check_pdf.py output/*.pdf
+      - uses: actions/setup-dotnet@v4
+        if: matrix.runtime == 'dotnet'
+        with:
+          dotnet-version: '10.0.x'
+      - name: Rotativa ASP.NET Core
+        if: matrix.runtime == 'dotnet'
+        run: bash scripts/run-dotnet.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pdf-examples-${{ matrix.runtime }}
+          path: output/
+          if-no-files-found: ignore
