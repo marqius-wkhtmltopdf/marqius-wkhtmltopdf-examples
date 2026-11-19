@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runtime: [python, php, ruby, node, go, java, elixir, dotnet]
+        runtime: [python, php-knplabs-snappy, php-phpwkhtmltopdf, php-cakepdf, php-laravel-snappy, php-knp-snappy-bundle, ruby, node, go, java, elixir, dotnet]
     steps:
       - uses: actions/checkout@v4
       - name: Install PDF inspection and fonts
@@ -32,14 +32,14 @@ jobs:
           python examples/django-wkhtmltopdf/render.py output/django-wkhtmltopdf.pdf
           python scripts/check_pdf.py output/*.pdf
       - uses: shivammathur/setup-php@v2
-        if: matrix.runtime == 'php'
+        if: startsWith(matrix.runtime, 'php-')
         with:
           php-version: '8.4'
           extensions: intl, mbstring, dom, xml, gd, zip, sqlite3, pdo_sqlite
           tools: composer:v2
-      - name: Five PHP integrations
-        if: matrix.runtime == 'php'
-        run: bash scripts/run-php.sh
+      - name: PHP integration
+        if: startsWith(matrix.runtime, 'php-')
+        run: bash scripts/run-php.sh "${{ matrix.runtime }}"
       - uses: ruby/setup-ruby@v1
         if: matrix.runtime == 'ruby'
         with:

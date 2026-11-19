@@ -6,8 +6,8 @@ use CakePdf\Pdf\CakePdf;
 
 Configure::write('CakePdf', [
     'engine' => [
-        'className' => 'CakePdf.WkHtmlToPdf',
-        'binary' => 'wkhtmltopdf',
+        'className' => CakePdf\Pdf\Engine\WkHtmlToPdfEngine::class,
+        'binary' => (getenv('WKHTMLTOPDF_BINARY') ?: '/usr/local/bin/wkhtmltopdf'),
     ],
 ]);
 $pdf = new CakePdf();
