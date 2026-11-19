@@ -1,5 +1,7 @@
 # Marqius wkhtmltopdf examples
 
+![Marqius wkhtmltopdf: keep your code, upgrade your PDFs](assets/cover.webp)
+
 **Drop-in replacement for wkhtmltopdf in 14 libraries.**
 
 Keep your library and templates. These small examples show the executable setting and render a sample invoice using Marqius. Start with the [switching guide](https://marqius.com/wkhtmltopdf/), or read the [developer manual](https://marqius.com/download/developer-manual.pdf).
