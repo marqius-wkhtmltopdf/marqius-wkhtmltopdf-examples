@@ -1,5 +1,7 @@
 # Marqius wkhtmltopdf examples
 
+[![Examples CI](https://github.com/marqius-wkhtmltopdf/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml/badge.svg)](https://github.com/marqius-wkhtmltopdf/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml)
+
 ![Marqius wkhtmltopdf: keep your code, upgrade your PDFs](assets/cover.webp)
 
 **Drop-in replacement for wkhtmltopdf in 14 libraries.**
@@ -47,11 +49,39 @@ python render.py invoice.pdf
 
 For PHP, run `composer install` in a standalone example folder, then `php render.php invoice.pdf`. Laravel and Symfony examples are copied into an existing application; see their individual READMEs and `scripts/run-php.sh` for fresh-project setup. For Node.js, run `npm install` then `node render.js invoice.pdf`. For Ruby, install the Gemfile with Bundler and run `bundle exec ruby render.rb invoice.pdf`. Go uses `go run . invoice.pdf`; Java uses Maven's `exec:java` with `Smoke` as the main class. Elixir uses `mix deps.get` then `mix run render.exs invoice.pdf`. The Rotativa example is an ASP.NET Core MVC application; its runner starts it on loopback only.
 
+## How do I know the output matches?
+
+Use the [developer manual's measured results](https://marqius.com/download/developer-manual.pdf#page=5) to assess library compatibility, then compare PDFs from your own templates. The table records the libraries' own suites on **19 November 2026**, using **wkhtmltopdf 0.12.6.1** on Debian 12 and the same environment with **Marqius 0.12.4**, then the fixes released in **0.12.5**. The baseline column shows passing tests out of the whole suite; the Marqius columns count those same baseline-passing tests that also passed after the switch.
+
+| Library | wkhtmltopdf baseline | Also passing with Marqius 0.12.4 | Also passing with Marqius 0.12.5 |
+|---|---|---|---|
+| python-pdfkit | 47 / 47 | 47 | 47 |
+| imgkit | 45 / 48 | 44 | 45 |
+| django-wkhtmltopdf | 14 / 18 | 14 | 14 |
+| KnpLabs Snappy | 49 / 49 | 49 | 49 |
+| laravel-snappy | 9 / 9 | 9 | 9 |
+| phpwkhtmltopdf | 34 / 34 | 34 | 34 |
+| KnpSnappyBundle | 26 / 26 | 26 | 26 |
+| CakePdf | 32 / 34 | 32 | 32 |
+| wicked_pdf | 61 / 61 | 58 | 61 |
+| PDFKit (Ruby) | 180 / 182 | 180 | 180 |
+| wkhtmltopdf for Node | 5 / 5 | 5 | 5 |
+| go-wkhtmltopdf | 34 / 35 | 34 | 34 |
+| java-wkhtmltopdf-wrapper | 30 / 30 | 29 | 30 |
+| pdf_generator (Elixir) | 12 / 15 | 12 | 12 |
+| Rotativa.AspNetCore | 10 / 10 | 10 | 10 |
+
+The manual includes **14 PDF libraries plus imgkit**, which produces images. KnpLabs Snappy, KnpSnappyBundle and CakePdf's own suites test wrapper code without executing the converter; each chapter also includes a real before/after rendering smoke test. These historical suite counts describe compatibility and do not certify pixel-identical output for every template. The current public workflow separately verifies the 14 runnable PDF examples.
+
+**How commands were captured.** A recording shim in front of the executable logs each call and its arguments, then delegates to the installed converter. This records the command lines driven by the real library calls for the manual's chapters. It preserves the converter's execution and exit status. Tests that mock the converter remain wrapper-code tests.
+
+**What a PDF comparison checks.** The manual's original smoke documents used unstyled HTML and produced an **appearance-only** verdict: the words and pages agreed, while the default font and some positions differed. Review fonts, wrapping, images, headers, footers and pagination on representative documents. The manual's [comparison method and known differences](https://marqius.com/download/developer-manual.pdf#page=6) explain the verdicts and the stricter appearance checks.
+
 ## Compare before switching
 
 Render the same representative document with your current engine and Marqius. Compare fonts, wrapping, headers, footers and page breaks. Keep a rollback path until the result meets your production requirements. The examples use static sample HTML and do not configure a service for untrusted documents.
 
-The [render-examples workflow](.github/workflows/render-examples.yml) exercises all 14 integrations on Linux and checks that each output is a PDF containing the expected invoice text. Consult the current workflow result for its latest status.
+The [render-examples workflow](.github/workflows/render-examples.yml) exercises all 14 integrations on Linux and checks that each output is a PDF containing the expected invoice text. The badge above links to its current result and downloadable artifacts.
 
 ## Licence and plans
 
