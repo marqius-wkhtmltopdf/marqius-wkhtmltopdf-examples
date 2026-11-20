@@ -1,12 +1,16 @@
-# Marqius wkhtmltopdf examples
+# Drop-in replacement for wkhtmltopdf in 14 libraries
 
 [![Examples CI](https://github.com/marqius-wkhtmltopdf/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml/badge.svg)](https://github.com/marqius-wkhtmltopdf/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml)
 
+**wkhtmltopdf is archived. Keep your code working.**
+
+Marqius is a maintained, Rust-based HTML-to-PDF converter for applications that launch the `wkhtmltopdf` executable. Keep your library, HTML templates and PDF calls; point your library's binary setting at Marqius. These runnable examples show the change for **14 PDF libraries**.
+
+[Find your library](#pick-your-library) · [See both invoice PDFs](https://marqius.com/download/launch-2026-11-20/marqius-wkhtmltopdf-same-html-comparison.pdf) · [Try 30 days, no card](https://marqius.com/wkhtmltopdf-buy/)
+
 ![Marqius wkhtmltopdf: keep your code, upgrade your PDFs](assets/cover.webp)
 
-**Drop-in replacement for wkhtmltopdf in 14 libraries.**
-
-Keep your library and templates. These small examples show the executable setting and render a sample invoice using Marqius. Start with the [switching guide](https://marqius.com/wkhtmltopdf/), or read the [developer manual](https://marqius.com/download/developer-manual.pdf).
+The upstream [wkhtmltopdf repository was archived on 2 January 2023](https://github.com/wkhtmltopdf/wkhtmltopdf). Its [project status](https://wkhtmltopdf.org/status.html) explains the aging Qt/WebKit stack. Start with the [switching guide](https://marqius.com/wkhtmltopdf/), or read the [developer manual](https://marqius.com/download/developer-manual.pdf).
 
 ## Install Marqius
 
@@ -49,6 +53,12 @@ python render.py invoice.pdf
 
 For PHP, run `composer install` in a standalone example folder, then `php render.php invoice.pdf`. Laravel and Symfony examples are copied into an existing application; see their individual READMEs and `scripts/run-php.sh` for fresh-project setup. For Node.js, run `npm install` then `node render.js invoice.pdf`. For Ruby, install the Gemfile with Bundler and run `bundle exec ruby render.rb invoice.pdf`. Go uses `go run . invoice.pdf`; Java uses Maven's `exec:java` with `Smoke` as the main class. Elixir uses `mix deps.get` then `mix run render.exs invoice.pdf`. The Rotativa example is an ASP.NET Core MVC application; its runner starts it on loopback only.
 
+## What does “drop-in” mean?
+
+Your application keeps calling its existing PDF library. Marqius supplies the executable that library starts. If your application pins a binary path, update that setting; use the example for your exact library above. You retain familiar command and option names, while the [manual](https://marqius.com/download/developer-manual.pdf) documents behavior and differences.
+
+Compatibility here covers integrations that launch an executable. Bindings that load `libwkhtmltox` directly need a separate integration. A custom table-of-contents XSL stylesheet is not applied, and JavaScript-dependent pages may use installed Chrome or Chromium. Compare representative documents before changing production.
+
 ## How do I know the output matches?
 
 Use the [developer manual's measured results](https://marqius.com/download/developer-manual.pdf#page=5) to assess library compatibility, then compare PDFs from your own templates. The table records the libraries' own suites on **19 November 2026**, using **wkhtmltopdf 0.12.6.1** on Debian 12 and the same environment with **Marqius 0.12.4**, then the fixes released in **0.12.5**. The baseline column shows passing tests out of the whole suite; the Marqius columns count those same baseline-passing tests that also passed after the switch.
@@ -78,6 +88,8 @@ The manual includes **14 PDF libraries plus imgkit**, which produces images. Knp
 **What a PDF comparison checks.** The manual's original smoke documents used unstyled HTML and produced an **appearance-only** verdict: the words and pages agreed, while the default font and some positions differed. Review fonts, wrapping, images, headers, footers and pagination on representative documents. The manual's [comparison method and known differences](https://marqius.com/download/developer-manual.pdf#page=6) explain the verdicts and the stricter appearance checks.
 
 ## Compare before switching
+
+**[Open a real, same-HTML invoice comparison](https://marqius.com/download/launch-2026-11-20/marqius-wkhtmltopdf-same-html-comparison.pdf).** One unchanged invoice was rendered by **wkhtmltopdf 0.12.6 (patched Qt)** and **Marqius 0.12.6** in the same Linux environment, with the same fonts and CLI flags, on 20 November 2026. The PDF includes a side-by-side overview, both original full pages, and the source and method. [Download the example pack](https://marqius.com/download/launch-2026-11-20/marqius-same-html-example.zip). This is one document, not a guarantee for every template.
 
 Render the same representative document with your current engine and Marqius. Compare fonts, wrapping, headers, footers and page breaks. Keep a rollback path until the result meets your production requirements. The examples use static sample HTML and do not configure a service for untrusted documents.
 
