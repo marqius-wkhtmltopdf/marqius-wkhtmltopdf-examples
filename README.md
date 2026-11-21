@@ -1,47 +1,53 @@
-# Drop-in replacement for wkhtmltopdf in 14 libraries
+# wkhtmltopdf replacement examples: 14 libraries, a one-line switch
 
-[![Examples CI](https://github.com/marqius-wkhtmltopdf/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml/badge.svg)](https://github.com/marqius-wkhtmltopdf/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml)
+[![Render all 14 library examples](https://github.com/marqiushq/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml/badge.svg)](https://github.com/marqiushq/marqius-wkhtmltopdf-examples/actions/workflows/render-examples.yml)
 
-**wkhtmltopdf is archived. Keep your code working.**
+**What it is.** Working examples for 14 popular wkhtmltopdf libraries, in Python, PHP, Ruby, JavaScript, Go, Java, Elixir and .NET. Each one makes a real invoice PDF with marqius-wkhtmltopdf, the maintained drop-in replacement for wkhtmltopdf, using the library just as its own documentation shows.
 
-Marqius is a maintained, Rust-based HTML-to-PDF converter for applications that launch the `wkhtmltopdf` executable. Keep your library, HTML templates and PDF calls; point your library's binary setting at Marqius. These runnable examples show the change for **14 PDF libraries**.
+**Why it matters.** wkhtmltopdf is archived, and Debian 13 and Ubuntu 26.04 no longer include it. Switching away from it should be a one-line change, not a rewrite. Here you can see that one line for your library, run it on your own machine and hold the PDF in a few minutes. A workflow runs all 14 examples on every change and checks each PDF.
 
-[Find your library](#pick-your-library) · [See both invoice PDFs](https://marqius.com/download/launch-2026-11-20/marqius-wkhtmltopdf-same-html-comparison.pdf) · [Try 30 days, no card](https://marqius.com/wkhtmltopdf-buy/)
-
-![Marqius wkhtmltopdf: keep your code, upgrade your PDFs](assets/cover.webp)
-
-The upstream [wkhtmltopdf repository was archived on 2 January 2023](https://github.com/wkhtmltopdf/wkhtmltopdf). Its [project status](https://wkhtmltopdf.org/status.html) explains the aging Qt/WebKit stack. Start with the [switching guide](https://marqius.com/wkhtmltopdf/), or read the [developer manual](https://marqius.com/download/developer-manual.pdf).
-
-## Install Marqius
-
-```bash
-curl -fsSL https://marqius.com/marqius-wkhtmltopdf.sh -o install-marqius.sh
-# Review the installer, then run it. It verifies its executable download.
-bash install-marqius.sh
-```
-
-The installer supplies a `wkhtmltopdf` executable. Keep your existing executable while evaluating; use the manual when you are ready to take over. Put the installed Marqius executable on PATH before running these examples. You can set `WKHTMLTOPDF_BINARY` to its absolute path (`export WKHTMLTOPDF_BINARY="$(command -v wkhtmltopdf)"`).
+![marqius-wkhtmltopdf: keep your code, upgrade your PDFs](assets/cover.webp)
 
 ## Pick your library
 
-| Library | Runtime | Detailed guide |
-| --- | --- | --- |
-| [python-pdfkit](examples/python-pdfkit/) | Python | [Chapter](https://marqius.com/download/developer-manual.pdf#page=7) |
-| [django-wkhtmltopdf](examples/django-wkhtmltopdf/) | Python / Django | [Chapter](https://marqius.com/download/developer-manual.pdf#page=13) |
-| [KnpLabs Snappy](examples/knplabs-snappy/) | PHP | [Chapter](https://marqius.com/download/developer-manual.pdf#page=16) |
-| [laravel-snappy](examples/laravel-snappy/) | PHP / Laravel | [Chapter](https://marqius.com/download/developer-manual.pdf#page=18) |
-| [phpwkhtmltopdf](examples/phpwkhtmltopdf/) | PHP | [Chapter](https://marqius.com/download/developer-manual.pdf#page=20) |
-| [KnpSnappyBundle](examples/knp-snappy-bundle/) | PHP / Symfony | [Chapter](https://marqius.com/download/developer-manual.pdf#page=23) |
-| [CakePdf](examples/cakepdf/) | PHP / CakePHP | [Chapter](https://marqius.com/download/developer-manual.pdf#page=26) |
-| [wicked_pdf](examples/wicked-pdf/) | Ruby | [Chapter](https://marqius.com/download/developer-manual.pdf#page=29) |
-| [PDFKit (Ruby)](examples/ruby-pdfkit/) | Ruby | [Chapter](https://marqius.com/download/developer-manual.pdf#page=31) |
-| [wkhtmltopdf for Node](examples/node-wkhtmltopdf/) | Node.js | [Chapter](https://marqius.com/download/developer-manual.pdf#page=33) |
-| [go-wkhtmltopdf](examples/go-wkhtmltopdf/) | Go | [Chapter](https://marqius.com/download/developer-manual.pdf#page=35) |
-| [java-wkhtmltopdf-wrapper](examples/java-wkhtmltopdf-wrapper/) | Java | [Chapter](https://marqius.com/download/developer-manual.pdf#page=38) |
-| [pdf_generator (Elixir)](examples/elixir-pdf-generator/) | Elixir | [Chapter](https://marqius.com/download/developer-manual.pdf#page=41) |
-| [Rotativa.AspNetCore](examples/rotativa-aspnetcore/) | .NET | [Chapter](https://marqius.com/download/developer-manual.pdf#page=44) |
+| Library | Language | Example | Manual chapter |
+|---|---|---|---|
+| python-pdfkit | Python | [examples/python-pdfkit](examples/python-pdfkit/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=7) |
+| django-wkhtmltopdf | Python, Django | [examples/django-wkhtmltopdf](examples/django-wkhtmltopdf/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=13) |
+| KnpLabs Snappy | PHP | [examples/knplabs-snappy](examples/knplabs-snappy/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=16) |
+| laravel-snappy | PHP, Laravel | [examples/laravel-snappy](examples/laravel-snappy/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=18) |
+| phpwkhtmltopdf | PHP | [examples/phpwkhtmltopdf](examples/phpwkhtmltopdf/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=20) |
+| KnpSnappyBundle | PHP, Symfony | [examples/knp-snappy-bundle](examples/knp-snappy-bundle/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=23) |
+| CakePdf | PHP, CakePHP | [examples/cakepdf](examples/cakepdf/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=26) |
+| wicked_pdf | Ruby, Rails | [examples/wicked-pdf](examples/wicked-pdf/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=29) |
+| PDFKit | Ruby | [examples/ruby-pdfkit](examples/ruby-pdfkit/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=31) |
+| wkhtmltopdf for Node | JavaScript, Node.js | [examples/node-wkhtmltopdf](examples/node-wkhtmltopdf/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=33) |
+| go-wkhtmltopdf | Go | [examples/go-wkhtmltopdf](examples/go-wkhtmltopdf/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=35) |
+| java-wkhtmltopdf-wrapper | Java | [examples/java-wkhtmltopdf-wrapper](examples/java-wkhtmltopdf-wrapper/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=38) |
+| pdf_generator | Elixir | [examples/elixir-pdf-generator](examples/elixir-pdf-generator/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=41) |
+| Rotativa.AspNetCore | .NET | [examples/rotativa-aspnetcore](examples/rotativa-aspnetcore/) | [Chapter](https://marqius.com/download/developer-manual.pdf#page=44) |
 
-## Run a first example
+Each folder has its own README: what to install, the one setting that names the program, and how to run it.
+
+## Run your first example
+
+**1. Install marqius-wkhtmltopdf.** You can read the installer before you run it:
+
+```bash
+curl -fsSL https://marqius.com/marqius-wkhtmltopdf.sh -o install-marqius.sh
+bash install-marqius.sh
+```
+
+The installer checks the program it downloads against its published checksum. Homebrew, apt, dnf, apk and Docker work too: see [marqius-wkhtmltopdf](https://github.com/marqiushq/marqius-wkhtmltopdf#install-in-one-minute).
+
+**2. Get the examples:**
+
+```bash
+git clone https://github.com/marqiushq/marqius-wkhtmltopdf-examples.git
+cd marqius-wkhtmltopdf-examples
+```
+
+**3. Run the one for your language.** In Python, for example:
 
 ```bash
 cd examples/python-pdfkit
@@ -51,54 +57,41 @@ pip install -r requirements.txt
 python render.py invoice.pdf
 ```
 
-For PHP, run `composer install` in a standalone example folder, then `php render.php invoice.pdf`. Laravel and Symfony examples are copied into an existing application; see their individual READMEs and `scripts/run-php.sh` for fresh-project setup. For Node.js, run `npm install` then `node render.js invoice.pdf`. For Ruby, install the Gemfile with Bundler and run `bundle exec ruby render.rb invoice.pdf`. Go uses `go run . invoice.pdf`; Java uses Maven's `exec:java` with `Smoke` as the main class. Elixir uses `mix deps.get` then `mix run render.exs invoice.pdf`. The Rotativa example is an ASP.NET Core MVC application; its runner starts it on loopback only.
+Open `invoice.pdf`. In the other languages:
 
-## What does “drop-in” mean?
+| Language | In the example's folder |
+|---|---|
+| PHP | `composer install`, then `php render.php invoice.pdf` |
+| Node.js | `npm install`, then `node render.js invoice.pdf` |
+| Ruby | `bundle install`, then `bundle exec ruby render.rb invoice.pdf` |
+| Go | `go run . invoice.pdf` |
+| Java | Maven's `exec:java`, with `Smoke` as the main class |
+| Elixir | `mix deps.get`, then `mix run render.exs invoice.pdf` |
+| .NET | The Rotativa example is an ASP.NET Core MVC app: see its README |
 
-Your application keeps calling its existing PDF library. Marqius supplies the executable that library starts. If your application pins a binary path, update that setting; use the example for your exact library above. You retain familiar command and option names, while the [manual](https://marqius.com/download/developer-manual.pdf) documents behavior and differences.
+The Laravel and Symfony examples go into an existing application: their READMEs, and `scripts/run-php.sh`, show how to set one up.
 
-Compatibility here covers integrations that launch an executable. Bindings that load `libwkhtmltox` directly need a separate integration. A custom table-of-contents XSL stylesheet is not applied, and JavaScript-dependent pages may use installed Chrome or Chromium. Compare representative documents before changing production.
+## What "drop-in" means
 
-## How do I know the output matches?
+Your app keeps calling its PDF library exactly as it does today. marqius-wkhtmltopdf is the program that library starts. If your settings name the path of wkhtmltopdf, you change that one setting; the example for your library shows where. If nothing names it, give marqius-wkhtmltopdf the name `wkhtmltopdf` with `sudo marqius-wkhtmltopdf install`, and nothing changes at all.
 
-Use the [developer manual's measured results](https://marqius.com/download/developer-manual.pdf#page=5) to assess library compatibility, then compare PDFs from your own templates. The table records the libraries' own suites on **19 November 2026**, using **wkhtmltopdf 0.12.6.1** on Debian 12 and the same environment with **Marqius 0.12.4**, then the fixes released in **0.12.5**. The baseline column shows passing tests out of the whole suite; the Marqius columns count those same baseline-passing tests that also passed after the switch.
+## Will my PDFs come out the same?
 
-| Library | wkhtmltopdf baseline | Also passing with Marqius 0.12.4 | Also passing with Marqius 0.12.5 |
-|---|---|---|---|
-| python-pdfkit | 47 / 47 | 47 | 47 |
-| imgkit | 45 / 48 | 44 | 45 |
-| django-wkhtmltopdf | 14 / 18 | 14 | 14 |
-| KnpLabs Snappy | 49 / 49 | 49 | 49 |
-| laravel-snappy | 9 / 9 | 9 | 9 |
-| phpwkhtmltopdf | 34 / 34 | 34 | 34 |
-| KnpSnappyBundle | 26 / 26 | 26 | 26 |
-| CakePdf | 32 / 34 | 32 | 32 |
-| wicked_pdf | 61 / 61 | 58 | 61 |
-| PDFKit (Ruby) | 180 / 182 | 180 | 180 |
-| wkhtmltopdf for Node | 5 / 5 | 5 | 5 |
-| go-wkhtmltopdf | 34 / 35 | 34 | 34 |
-| java-wkhtmltopdf-wrapper | 30 / 30 | 29 | 30 |
-| pdf_generator (Elixir) | 12 / 15 | 12 | 12 |
-| Rotativa.AspNetCore | 10 / 10 | 10 | 10 |
+You can check, in public and on your own templates:
 
-The manual includes **14 PDF libraries plus imgkit**, which produces images. KnpLabs Snappy, KnpSnappyBundle and CakePdf's own suites test wrapper code without executing the converter; each chapter also includes a real before/after rendering smoke test. These historical suite counts describe compatibility and do not certify pixel-identical output for every template. The current public workflow separately verifies the 14 runnable PDF examples.
+- **[Library tests](https://github.com/marqiushq/wkhtmltopdf-library-tests):** the test suites of 15 wkhtmltopdf libraries, written by their own authors, run with wkhtmltopdf 0.12.6 and with marqius-wkhtmltopdf on every release, with signed results.
+- **[Parity suite](https://github.com/marqiushq/wkhtmltopdf-parity):** 86 documents through both programs on every release, every PDF compared, misses included. Run it on your own templates; nothing is uploaded.
+- **[Parity check](https://github.com/marqiushq/wkhtmltopdf-parity-check):** the same comparison in your CI, on every pull request.
+- **[One invoice, side by side](https://marqius.com/download/launch-2026-11-20/marqius-wkhtmltopdf-same-html-comparison.pdf):** the same HTML through both programs, with both full pages and the method.
 
-**How commands were captured.** A recording shim in front of the executable logs each call and its arguments, then delegates to the installed converter. This records the command lines driven by the real library calls for the manual's chapters. It preserves the converter's execution and exit status. Tests that mock the converter remain wrapper-code tests.
+## What these examples do not cover
 
-**What a PDF comparison checks.** The manual's original smoke documents used unstyled HTML and produced an **appearance-only** verdict: the words and pages agreed, while the default font and some positions differed. Review fonts, wrapping, images, headers, footers and pagination on representative documents. The manual's [comparison method and known differences](https://marqius.com/download/developer-manual.pdf#page=6) explain the verdicts and the stricter appearance checks.
+- They cover libraries that start the wkhtmltopdf program. Bindings that load the `libwkhtmltox` library directly, such as DinkToPdf, need a different integration.
+- A custom table-of-contents XSL style sheet is not applied. The [developer manual](https://marqius.com/download/developer-manual.pdf) lists every difference.
+- They use sample HTML. For documents from people you don't know, read the [security guidance](https://marqius.com/wkhtmltopdf/security/) first.
 
-## Compare before switching
+## Licence
 
-**[Open a real, same-HTML invoice comparison](https://marqius.com/download/launch-2026-11-20/marqius-wkhtmltopdf-same-html-comparison.pdf).** One unchanged invoice was rendered by **wkhtmltopdf 0.12.6 (patched Qt)** and **Marqius 0.12.6** in the same Linux environment, with the same fonts and CLI flags, on 20 November 2026. The PDF includes a side-by-side overview, both original full pages, and the source and method. [Download the example pack](https://marqius.com/download/launch-2026-11-20/marqius-same-html-example.zip). This is one document, not a guarantee for every template.
+The example code here is open source under the MIT licence. marqius-wkhtmltopdf is proprietary software from Simple AI LLC under its own [licence](https://marqius.com/wkhtmltopdf/licence-agreement/); this repository holds examples, not the program. It is free for 30 days with no card, then $10 USD per Client per month, or $500 USD per Client for a lifetime licence with upgrades, plus applicable taxes. A Client is a legal entity under the licence. [Plans and trial](https://marqius.com/wkhtmltopdf-buy/).
 
-Render the same representative document with your current engine and Marqius. Compare fonts, wrapping, headers, footers and page breaks. Keep a rollback path until the result meets your production requirements. The examples use static sample HTML and do not configure a service for untrusted documents.
-
-The [render-examples workflow](.github/workflows/render-examples.yml) exercises all 14 integrations on Linux and checks that each output is a PDF containing the expected invoice text. The badge above links to its current result and downloadable artifacts.
-
-## Licence and plans
-
-The example code in this repository is MIT licensed. The Marqius converter is proprietary software under its own [licence](https://marqius.com/wkhtmltopdf/licence-agreement/). This repository contains integration examples, not the converter's source or binaries.
-
-[30-day no-card trial and wkhtmltopdf pricing](https://marqius.com/wkhtmltopdf-buy/): $10 USD per Client per month, or $500 USD per Client for a lifetime licence with upgrades; applicable taxes are additional. See the licence for the legal-entity definition of a Client.
-
-[marqius.com](https://marqius.com/) · [All 14 integrations](https://marqius.com/wkhtmltopdf/) · [Download and install](https://marqius.com/wkhtmltopdf/download/)
+★ **Star this repository** if an example saved you time.
