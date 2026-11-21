@@ -92,6 +92,6 @@ You can check, in public and on your own templates:
 
 ## Licence
 
-The example code here is open source under the MIT licence. marqius-wkhtmltopdf is proprietary software from Simple AI LLC under its own [licence](https://marqius.com/wkhtmltopdf/licence-agreement/); this repository holds examples, not the program. It is free for 30 days with no card, then $10 USD per Client per month, or $500 USD per Client for a lifetime licence with upgrades, plus applicable taxes. A Client is a legal entity under the licence. [Plans and trial](https://marqius.com/wkhtmltopdf-buy/).
+The example code here is open source under the MIT licence. marqius-wkhtmltopdf is proprietary software from Simple AI LLC under its own [licence](https://marqius.com/wkhtmltopdf/licence-agreement/); this repository holds examples, not the program. It is free for 30 days with no card, then plans start at $290 USD a year, plus applicable taxes; personal, teaching and open-source use is free with a Community licence. [Plans and trial](https://marqius.com/wkhtmltopdf-buy/).
 
 ★ **Star this repository** if an example saved you time.
